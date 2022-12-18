@@ -1,7 +1,26 @@
 package org.fly.sky.dao;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
+import org.fly.sky.domain.ScenerySpot;
+
+import java.util.List;
 
 @Mapper
 public interface ScenerySpotDao {
+
+    @Select("select * from scenery_spot where id = #{id}")
+    ScenerySpot getById(Integer id);
+
+    @Select("select * from scenery_spot")
+    List<ScenerySpot> getAll();
+
+    @Insert("insert into scenery_spot (name, `desc`, area, createTimestamp, updateTimestamp) values (#{name}, #{desc}, #{area}, now(), now())")
+    int save(ScenerySpot scenerySpot);
+
+    @Update("update scenery_spot set name = #{name}, `desc` = #{desc}, updateTimestamp = now() where id = #{id}")
+    int update(ScenerySpot scenerySpot);
+
+    @Delete("delete from scenery_spot where id = #{id}")
+    int delete(Integer id);
+
 }
