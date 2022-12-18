@@ -6,7 +6,7 @@ INSERT INTO scenery_spot (name, `desc`, area, createTimestamp, updateTimestamp) 
 
 DELETE FROM ticket WHERE TRUE;
 
-INSERT INTO ticket (name, `desc`, type, price, scenerySpotId, createTimestamp, updateTimestamp) VALUES ('成人普票', 'person', 0, 100, 1, now(), now());
+INSERT INTO ticket (name, `desc`, type, price, scenerySpotId, createTimestamp, updateTimestamp) VALUES ('成人票', 'person', 0, 100, 1, now(), now());
 
 DELETE FROM `order` WHERE TRUE;
 
