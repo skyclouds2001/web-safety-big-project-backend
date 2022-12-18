@@ -14,7 +14,7 @@ public class Ticket {
     /** 门票描述 | 允许为空 */
     private String desc;
 
-    /** 门票类型 | 0-成人票 1-儿童票 */
+    /** 门票类型 | 0-成人票 1-儿童票 2-其他 */
     private int type;
 
     /** 门票价格 */
