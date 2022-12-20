@@ -27,12 +27,12 @@ public class Order {
     private String note;
 
     /** 订单创建时间戳 */
-    private int createTimestamp;
+    private long createTimestamp;
 
     /** 订单更新时间戳 */
-    private int updateTimestamp;
+    private long updateTimestamp;
 
-    public Order(int id, int time, int ticketId, int amount, int customerId, int cost, String note, int createTimestamp, int updateTimestamp) {
+    public Order(int id, int time, int ticketId, int amount, int customerId, int cost, String note, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.time = time;
         this.ticketId = ticketId;
@@ -100,19 +100,19 @@ public class Order {
         this.note = note;
     }
 
-    public int getCreateTimestamp() {
+    public long getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public void setCreateTimestamp(int createTimestamp) {
+    public void setCreateTimestamp(long createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
-    public int getUpdateTimestamp() {
+    public long getUpdateTimestamp() {
         return updateTimestamp;
     }
 
-    public void setUpdateTimestamp(int updateTimestamp) {
+    public void setUpdateTimestamp(long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
     }
 
@@ -156,8 +156,8 @@ public class Order {
         result = 31 * result + getCustomerId();
         result = 31 * result + getCost();
         result = 31 * result + (getNote() != null ? getNote().hashCode() : 0);
-        result = 31 * result + getCreateTimestamp();
-        result = 31 * result + getUpdateTimestamp();
+        result = 31 * result + (int) (getCreateTimestamp() ^ (getCreateTimestamp() >>> 32));
+        result = 31 * result + (int) (getUpdateTimestamp() ^ (getUpdateTimestamp() >>> 32));
         return result;
     }
 

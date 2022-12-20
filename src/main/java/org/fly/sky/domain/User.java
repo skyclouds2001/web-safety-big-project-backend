@@ -42,12 +42,12 @@ public class User {
     private String password;
 
     /** 客户创建时间戳 */
-    private int createTimestamp;
+    private long createTimestamp;
 
     /** 客户更新时间戳 */
-    private int updateTimestamp;
+    private long updateTimestamp;
 
-    public User(int id, String name, int sex, String birth, String phone, String desc, String email, String identity, String address, int type, String nickname, String password, int createTimestamp, int updateTimestamp) {
+    public User(int id, String name, int sex, String birth, String phone, String desc, String email, String identity, String address, int type, String nickname, String password, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -160,19 +160,19 @@ public class User {
         this.password = password;
     }
 
-    public int getCreateTimestamp() {
+    public long getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public void setCreateTimestamp(int createTimestamp) {
+    public void setCreateTimestamp(long createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
-    public int getUpdateTimestamp() {
+    public long getUpdateTimestamp() {
         return updateTimestamp;
     }
 
-    public void setUpdateTimestamp(int updateTimestamp) {
+    public void setUpdateTimestamp(long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
     }
 
@@ -231,8 +231,8 @@ public class User {
         result = 31 * result + getType();
         result = 31 * result + getNickname().hashCode();
         result = 31 * result + getPassword().hashCode();
-        result = 31 * result + getCreateTimestamp();
-        result = 31 * result + getUpdateTimestamp();
+        result = 31 * result + (int) (getCreateTimestamp() ^ (getCreateTimestamp() >>> 32));
+        result = 31 * result + (int) (getUpdateTimestamp() ^ (getUpdateTimestamp() >>> 32));
         return result;
     }
 
