@@ -31,6 +31,8 @@ public class Ticket {
     /** 门票更新时间戳 */
     private long updateTimestamp;
 
+    private Ticket() {}
+
     public Ticket(int id, String name, String desc, int type, int price, int scenerySpotId, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
@@ -42,12 +44,21 @@ public class Ticket {
         this.updateTimestamp = updateTimestamp;
     }
 
+    public static Ticket createTicket() {
+        return new Ticket();
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Ticket id(int id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
@@ -58,12 +69,22 @@ public class Ticket {
         this.name = name;
     }
 
+    public Ticket name(String name) {
+        this.name = name;
+        return this;
+    }
+
     public String getDesc() {
         return desc;
     }
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Ticket desc(String desc) {
+        this.desc = desc;
+        return this;
     }
 
     public int getType() {
@@ -74,6 +95,11 @@ public class Ticket {
         this.type = type;
     }
 
+    public Ticket type(int type) {
+        this.type = type;
+        return this;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -82,12 +108,22 @@ public class Ticket {
         this.price = price;
     }
 
+    public Ticket price(int price) {
+        this.price = price;
+        return this;
+    }
+
     public int getScenerySpotId() {
         return scenerySpotId;
     }
 
     public void setScenerySpotId(int scenerySpotId) {
         this.scenerySpotId = scenerySpotId;
+    }
+
+    public Ticket scenerySpotId(int scenerySpotId) {
+        this.scenerySpotId = scenerySpotId;
+        return this;
     }
 
     public long getCreateTimestamp() {

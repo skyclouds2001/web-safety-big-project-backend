@@ -25,6 +25,8 @@ public class ScenerySpot {
     /** 景点更新时间戳 */
     private long updateTimestamp;
 
+    private ScenerySpot() {}
+
     public ScenerySpot(int id, String name, String desc, String area, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
@@ -32,6 +34,10 @@ public class ScenerySpot {
         this.area = area;
         this.createTimestamp = createTimestamp;
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public static ScenerySpot createScenerySpot() {
+        return new ScenerySpot();
     }
 
     public int getId() {
@@ -42,12 +48,22 @@ public class ScenerySpot {
         this.id = id;
     }
 
+    public ScenerySpot id(int id) {
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ScenerySpot name(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getDesc() {
@@ -58,12 +74,22 @@ public class ScenerySpot {
         this.desc = desc;
     }
 
+    public ScenerySpot desc(String desc) {
+        this.desc = desc;
+        return this;
+    }
+
     public String getArea() {
         return area;
     }
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public ScenerySpot area(String area) {
+        this.area = area;
+        return this;
     }
 
     public long getCreateTimestamp() {

@@ -49,6 +49,8 @@ public class User {
     /** 客户更新时间戳 */
     private long updateTimestamp;
 
+    private User() {}
+
     public User(int id, String name, int sex, String birth, String phone, String desc, String email, String identity, String address, int type, String nickname, String password, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
@@ -66,12 +68,21 @@ public class User {
         this.updateTimestamp = updateTimestamp;
     }
 
+    public static User createUser() {
+        return new User();
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public User id(int id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
@@ -82,12 +93,22 @@ public class User {
         this.name = name;
     }
 
+    public User name(String name) {
+        this.name = name;
+        return this;
+    }
+
     public int getSex() {
         return sex;
     }
 
     public void setSex(int sex) {
         this.sex = sex;
+    }
+
+    public User sex(int sex) {
+        this.sex = sex;
+        return this;
     }
 
     public String getBirth() {
@@ -98,12 +119,22 @@ public class User {
         this.birth = birth;
     }
 
+    public User birth(String birth) {
+        this.birth = birth;
+        return this;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public User phone(String phone) {
+        this.phone = phone;
+        return this;
     }
 
     public String getDesc() {
@@ -114,12 +145,22 @@ public class User {
         this.desc = desc;
     }
 
+    public User desc(String desc) {
+        this.desc = desc;
+        return this;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public User email(String email) {
+        this.email = email;
+        return this;
     }
 
     public String getIdentity() {
@@ -130,12 +171,22 @@ public class User {
         this.identity = identity;
     }
 
+    public User identity(String identity) {
+        this.identity = identity;
+        return this;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User address(String address) {
+        this.address = address;
+        return this;
     }
 
     public int getType() {
@@ -146,6 +197,11 @@ public class User {
         this.type = type;
     }
 
+    public User type(int type) {
+        this.type = type;
+        return this;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -154,12 +210,22 @@ public class User {
         this.nickname = nickname;
     }
 
+    public User nickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public User password(String password) {
+        this.password = password;
+        return this;
     }
 
     public long getCreateTimestamp() {

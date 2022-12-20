@@ -34,6 +34,8 @@ public class Order {
     /** 订单更新时间戳 */
     private long updateTimestamp;
 
+    private Order() {}
+
     public Order(int id, int time, int ticketId, int amount, int customerId, int cost, String note, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.time = time;
@@ -46,12 +48,21 @@ public class Order {
         this.updateTimestamp = updateTimestamp;
     }
 
+    public static Order createOrder() {
+        return new Order();
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Order id(int id) {
+        this.id = id;
+        return this;
     }
 
     public int getTime() {
@@ -62,12 +73,22 @@ public class Order {
         this.time = time;
     }
 
+    public Order time(int time) {
+        this.time = time;
+        return this;
+    }
+
     public int getTicketId() {
         return ticketId;
     }
 
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
+    }
+
+    public Order ticket(int ticketId) {
+        this.ticketId = ticketId;
+        return this;
     }
 
     public int getAmount() {
@@ -78,12 +99,22 @@ public class Order {
         this.amount = amount;
     }
 
+    public Order amount(int amount) {
+        this.amount = amount;
+        return this;
+    }
+
     public int getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public Order customerId(int customerId) {
+        this.customerId = customerId;
+        return this;
     }
 
     public int getCost() {
@@ -94,12 +125,22 @@ public class Order {
         this.cost = cost;
     }
 
+    public Order cost(int cost) {
+        this.cost = cost;
+        return this;
+    }
+
     public String getNote() {
         return note;
     }
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Order note(String note) {
+        this.note = note;
+        return this;
     }
 
     public long getCreateTimestamp() {
