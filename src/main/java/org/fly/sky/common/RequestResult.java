@@ -1,5 +1,10 @@
 package org.fly.sky.common;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 public class RequestResult {
 
     private static final RequestCode UNKNOWN = RequestCode.UNKNOWN;

@@ -4,6 +4,11 @@ import org.fly.sky.domain.User;
 
 import java.util.List;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 public interface UserService {
 
     User getById(Integer id);

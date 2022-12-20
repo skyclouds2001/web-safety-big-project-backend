@@ -5,6 +5,11 @@ import org.fly.sky.domain.Order;
 
 import java.util.List;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 @Mapper
 public interface OrderDao {
 
