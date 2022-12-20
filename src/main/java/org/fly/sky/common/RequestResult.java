@@ -39,6 +39,15 @@ public class RequestResult {
         this.data = data;
     }
 
+    public static RequestResult create() {
+        RequestResult result = new RequestResult();
+        result.setSuccess(UNKNOWN.isSuccess());
+        result.setCode(UNKNOWN.getCode());
+        result.setMessage(UNKNOWN.getMessage());
+        result.setData(null);
+        return result;
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -86,7 +95,7 @@ public class RequestResult {
         return this;
     }
 
-    public RequestResult error() {
+    public RequestResult fail() {
         this.setSuccess(FAILURE.isSuccess());
         return this;
     }

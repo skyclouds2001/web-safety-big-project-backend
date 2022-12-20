@@ -30,6 +30,18 @@ public enum RequestCode {
         return message;
     }
 
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "RequestCode{" +
