@@ -1,7 +1,7 @@
 package org.fly.sky.controller;
 
-import org.fly.sky.common.RequestCode;
-import org.fly.sky.common.RequestResult;
+import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.User;
 import org.fly.sky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,30 +23,30 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
-    public RequestResult getSingleUser(@PathVariable Integer id) {
+    public Result getSingleUser(@PathVariable Integer id) {
         User user = userService.getById(id);
-        return new RequestResult(user != null ? RequestCode.SUCCESS : RequestCode.FAILURE, user);
+        return new Result(user != null ? Code.SUCCESS : Code.FAILURE, user);
     }
 
     @GetMapping
-    public RequestResult getAllUser() {
+    public Result getAllUser() {
         List<User> users = userService.getAll();
-        return new RequestResult(users != null ? RequestCode.SUCCESS : RequestCode.FAILURE, users);
+        return new Result(users != null ? Code.SUCCESS : Code.FAILURE, users);
     }
 
     @PostMapping
-    public RequestResult addUser(@RequestBody User user) {
-        return new RequestResult(userService.save(user) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result addUser(@RequestBody User user) {
+        return new Result(userService.save(user) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
     @PutMapping
-    public RequestResult updateUser(@RequestBody User user) {
-        return new RequestResult(userService.update(user) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result updateUser(@RequestBody User user) {
+        return new Result(userService.update(user) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
     @DeleteMapping
-    public RequestResult removeUser(@RequestParam Integer id) {
-        return new RequestResult(userService.delete(id) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result removeUser(@RequestParam Integer id) {
+        return new Result(userService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
 }

@@ -1,7 +1,7 @@
 package org.fly.sky.controller;
 
-import org.fly.sky.common.RequestCode;
-import org.fly.sky.common.RequestResult;
+import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.ScenerySpot;
 import org.fly.sky.service.ScenerySpotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,30 +23,30 @@ public class ScenerySpotController {
     private ScenerySpotService scenerySpotService;
 
     @GetMapping("/{id}")
-    public RequestResult getSingleScenerySpot(@PathVariable Integer id) {
+    public Result getSingleScenerySpot(@PathVariable Integer id) {
         ScenerySpot scenerySpot = scenerySpotService.getById(id);
-        return new RequestResult(scenerySpot != null ? RequestCode.SUCCESS : RequestCode.FAILURE, scenerySpot);
+        return new Result(scenerySpot != null ? Code.SUCCESS : Code.FAILURE, scenerySpot);
     }
 
     @GetMapping
-    public RequestResult getAllScenerySpot() {
+    public Result getAllScenerySpot() {
         List<ScenerySpot> scenerySpots = scenerySpotService.getAll();
-        return new RequestResult(scenerySpots != null ? RequestCode.SUCCESS : RequestCode.FAILURE, scenerySpots);
+        return new Result(scenerySpots != null ? Code.SUCCESS : Code.FAILURE, scenerySpots);
     }
 
     @PostMapping
-    public RequestResult addScenerySpot(@RequestBody ScenerySpot scenerySpot) {
-        return new RequestResult(scenerySpotService.save(scenerySpot) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result addScenerySpot(@RequestBody ScenerySpot scenerySpot) {
+        return new Result(scenerySpotService.save(scenerySpot) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
     @PutMapping
-    public RequestResult updateScenerySpot(@RequestBody ScenerySpot scenerySpot) {
-        return new RequestResult(scenerySpotService.update(scenerySpot) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result updateScenerySpot(@RequestBody ScenerySpot scenerySpot) {
+        return new Result(scenerySpotService.update(scenerySpot) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
     @DeleteMapping
-    public RequestResult removeScenerySpot(@RequestParam Integer id) {
-        return new RequestResult(scenerySpotService.delete(id) ? RequestCode.SUCCESS : RequestCode.FAILURE, null);
+    public Result removeScenerySpot(@RequestParam Integer id) {
+        return new Result(scenerySpotService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
     }
 
 }

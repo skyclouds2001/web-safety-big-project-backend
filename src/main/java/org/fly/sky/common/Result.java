@@ -5,13 +5,13 @@ package org.fly.sky.common;
  * @version 0.0
  * @since 0.0
  */
-public class RequestResult {
+public class Result {
 
-    private static final RequestCode UNKNOWN = RequestCode.UNKNOWN;
+    private static final Code UNKNOWN = Code.UNKNOWN;
 
-    private static final RequestCode SUCCESS = RequestCode.SUCCESS;
+    private static final Code SUCCESS = Code.SUCCESS;
 
-    private static final RequestCode FAILURE = RequestCode.FAILURE;
+    private static final Code FAILURE = Code.FAILURE;
 
     private boolean success;
 
@@ -21,31 +21,31 @@ public class RequestResult {
 
     private Object data;
 
-    public RequestResult() {
+    public Result() {
         this(null);
     }
 
-    public RequestResult(Object data) {
+    public Result(Object data) {
         this(UNKNOWN.getCode(), UNKNOWN.getMessage(), data);
     }
 
-    public RequestResult(int code, String message, Object data) {
+    public Result(int code, String message, Object data) {
         this(code == SUCCESS.getCode(), code, message, data);
     }
 
-    public RequestResult(RequestCode requestCode, Object data) {
-        this(requestCode.getCode(), requestCode.getMessage(), data);
+    public Result(Code code, Object data) {
+        this(code.getCode(), code.getMessage(), data);
     }
 
-    public RequestResult(boolean success, int code, String message, Object data) {
+    public Result(boolean success, int code, String message, Object data) {
         this.success = success;
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static RequestResult create() {
-        RequestResult result = new RequestResult();
+    public static Result create() {
+        Result result = new Result();
         result.setSuccess(UNKNOWN.isSuccess());
         result.setCode(UNKNOWN.getCode());
         result.setMessage(UNKNOWN.getMessage());
@@ -87,7 +87,7 @@ public class RequestResult {
 
     @Override
     public String toString() {
-        return "RequestResult{" +
+        return "Result{" +
                 "success=" + success +
                 ", code=" + code +
                 ", message='" + message + '\'' +
@@ -95,32 +95,32 @@ public class RequestResult {
                 '}';
     }
 
-    public RequestResult ok() {
+    public Result ok() {
         this.setSuccess(SUCCESS.isSuccess());
         return this;
     }
 
-    public RequestResult fail() {
+    public Result fail() {
         this.setSuccess(FAILURE.isSuccess());
         return this;
     }
 
-    public RequestResult success(boolean success) {
+    public Result success(boolean success) {
         this.setSuccess(success);
         return this;
     }
 
-    public RequestResult code(Integer code){
+    public Result code(Integer code){
         this.setCode(code);
         return this;
     }
 
-    public RequestResult message(String message){
+    public Result message(String message){
         this.setMessage(message);
         return this;
     }
 
-    public RequestResult data(Object data) {
+    public Result data(Object data) {
         this.setData(data);
         return this;
     }

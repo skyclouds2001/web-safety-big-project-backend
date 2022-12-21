@@ -1,8 +1,8 @@
 package org.fly.sky.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.fly.sky.common.RequestCode;
-import org.fly.sky.common.RequestResult;
+import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public RequestResult exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
+    public Result exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
         logger.error("服务错误: ", e);
-        return new RequestResult(RequestCode.FAILURE, null);
+        return new Result(Code.FAILURE, null);
     }
 
 }

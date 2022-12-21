@@ -5,7 +5,7 @@ package org.fly.sky.common;
  * @version 0.0
  * @since 0.0
  */
-public enum RequestCode {
+public enum Code {
 
     UNKNOWN(-1, "未知"),
     SUCCESS(0, "成功"),
@@ -17,7 +17,7 @@ public enum RequestCode {
 
     private String message;
 
-    RequestCode(int code, String message) {
+    Code(int code, String message) {
         this.success = code == 0;
         this.code = code;
         this.message = message;
@@ -49,7 +49,7 @@ public enum RequestCode {
 
     @Override
     public String toString() {
-        return "RequestCode{" +
+        return "Code{" +
                 "success=" + success +
                 ", code=" + code +
                 ", message='" + message + '\'' +
