@@ -1,7 +1,9 @@
 package org.fly.sky.service.impl;
 
+import org.fly.sky.common.Code;
 import org.fly.sky.dao.ScenerySpotDao;
 import org.fly.sky.domain.ScenerySpot;
+import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.ScenerySpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,13 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public ScenerySpot getById(Integer id) {
-        return scenerySpotDao.getById(id);
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        ScenerySpot res = scenerySpotDao.getById(id);
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -35,7 +43,10 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public List<ScenerySpot> getAll() {
-        return scenerySpotDao.getAll();
+        List<ScenerySpot> res = scenerySpotDao.getAll();
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -45,7 +56,17 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public boolean save(ScenerySpot scenerySpot) {
-        return scenerySpotDao.save(scenerySpot) > 0;
+        if (scenerySpot.getName() == null ||
+                scenerySpot.getArea() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
+        if (scenerySpot.getName().trim().length() == 0 ||
+                scenerySpot.getArea().trim().length() == 0)
+            throw new CustomException(Code.EMPTY_STRING_PARAM);
+
+        int res = scenerySpotDao.save(scenerySpot);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -55,7 +76,30 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public boolean update(ScenerySpot scenerySpot) {
-        return scenerySpotDao.update(scenerySpot) > 0;
+        if (scenerySpot.getId() <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        ScenerySpot spot = scenerySpotDao.getById(scenerySpot.getId());
+        if (spot == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+
+        if (scenerySpot.getName() != null) {
+            if (scenerySpot.getName().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                spot.setName(scenerySpot.getName());
+        }
+        if (scenerySpot.getArea() != null) {
+            if (scenerySpot.getArea().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                spot.setArea(scenerySpot.getArea());
+        }
+
+        int res = scenerySpotDao.update(spot);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -65,7 +109,13 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public boolean delete(Integer id) {
-        return scenerySpotDao.delete(id) > 0;
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        int res = scenerySpotDao.delete(id);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
+        return true;
     }
 
 }

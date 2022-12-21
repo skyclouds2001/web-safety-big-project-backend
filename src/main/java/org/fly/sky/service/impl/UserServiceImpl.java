@@ -1,7 +1,9 @@
 package org.fly.sky.service.impl;
 
+import org.fly.sky.common.Code;
 import org.fly.sky.dao.UserDao;
 import org.fly.sky.domain.User;
+import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User getById(Integer id) {
-        return userDao.getById(id);
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        User res = userDao.getById(id);
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -35,7 +43,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> getAll() {
-        return userDao.getAll();
+        List<User> res = userDao.getAll();
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -45,7 +56,25 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean save(User user) {
-        return userDao.save(user) > 0;
+        if (user.getName() == null ||
+                user.getPhone() == null ||
+                user.getIdentity() == null ||
+                user.getNickname() == null ||
+                user.getPassword() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
+        if (user.getName().trim().length() == 0 ||
+                user.getPhone().trim().length() == 0 ||
+                user.getIdentity().trim().length() == 0 ||
+                user.getNickname().trim().length() == 0 ||
+                user.getPassword().trim().length() == 0)
+            throw new CustomException(Code.EMPTY_STRING_PARAM);
+        if (user.getType() != 0 && user.getType() != 1 || user.getSex() != 0 && user.getSex() != 1)
+            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+
+        int res = userDao.save(user);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -55,7 +84,60 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean update(User user) {
-        return userDao.update(user) > 0;
+        if (user.getId() <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        User us = userDao.getById(user.getId());
+        if (us == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+
+        if (user.getName() != null) {
+            if (user.getName().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                us.setName(user.getName());
+        }
+        if (user.getPhone() != null) {
+            if (user.getPhone().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                us.setPhone(user.getPhone());
+        }
+        if (user.getIdentity() != null) {
+            if (user.getIdentity().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                us.setIdentity(user.getIdentity());
+        }
+        if (user.getNickname() != null) {
+            if (user.getNickname().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                us.setNickname(user.getNickname());
+        }
+        if (user.getPassword() != null) {
+            if (user.getPassword().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                us.setPassword(user.getPassword());
+        }
+        if (user.getSex() == 0 || user.getSex() == 1)
+            us.setSex(user.getSex());
+        if (user.getType() == 0 || user.getType() == 1)
+            us.setType(user.getType());
+        if (user.getBirth() != null && user.getBirth().trim().length() > 0)
+            us.setBirth(user.getBirth());
+        if (user.getDesc() != null && user.getDesc().trim().length() > 0)
+            us.setDesc(user.getDesc());
+        if (user.getEmail() != null && user.getEmail().trim().length() > 0)
+            us.setEmail(user.getEmail());
+        if (user.getAddress() != null && user.getAddress().trim().length() > 0)
+            us.setAddress(user.getAddress());
+
+        int res = userDao.update(us);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -65,7 +147,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean delete(Integer id) {
-        return userDao.delete(id) > 0;
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        int res = userDao.delete(id);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
+        return true;
     }
 
 }

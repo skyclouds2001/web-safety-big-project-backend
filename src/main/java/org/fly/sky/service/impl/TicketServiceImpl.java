@@ -1,7 +1,9 @@
 package org.fly.sky.service.impl;
 
+import org.fly.sky.common.Code;
 import org.fly.sky.dao.TicketDao;
 import org.fly.sky.domain.Ticket;
+import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,13 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public Ticket getById(Integer id) {
-        return ticketDao.getById(id);
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        Ticket res = ticketDao.getById(id);
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -35,7 +43,10 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public List<Ticket> getAll() {
-        return ticketDao.getAll();
+        List<Ticket> res = ticketDao.getAll();
+        if (res == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        return res;
     }
 
     /**
@@ -45,7 +56,18 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public boolean save(Ticket ticket) {
-        return ticketDao.save(ticket) > 0;
+        if (ticket.getName() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
+        if (ticket.getName().trim().length() == 0)
+            throw new CustomException(Code.EMPTY_STRING_PARAM);
+        if (ticket.getPrice() < 0 ||
+                ticket.getType() < 0 || ticket.getType() > 2)
+            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+
+        int res = ticketDao.save(ticket);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -55,7 +77,36 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public boolean update(Ticket ticket) {
-        return ticketDao.update(ticket) > 0;
+        if (ticket.getId() <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        Ticket tic = ticketDao.getById(ticket.getId());
+        if (tic == null)
+            throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+
+        if (ticket.getName() != null) {
+            if (ticket.getName().trim().length() == 0)
+                throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else
+                tic.setName(ticket.getName());
+        }
+        if (ticket.getType() >= 0 && ticket.getType() <= 2)
+            tic.setType(ticket.getType());
+        else
+            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        if (ticket.getPrice() >= 0)
+            tic.setPrice(ticket.getPrice());
+        else
+            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        if (ticket.getScenerySpotId() > 0)
+            tic.setScenerySpotId(ticket.getScenerySpotId());
+        else
+            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+
+        int res = ticketDao.update(tic);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
+        return true;
     }
 
     /**
@@ -65,7 +116,13 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public boolean delete(Integer id) {
-        return ticketDao.delete(id) > 0;
+        if (id <= 0)
+            throw new CustomException(Code.INCORRECT_INDEX_PARAM);
+
+        int res = ticketDao.delete(id);
+        if (res == 0)
+            throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
+        return true;
     }
 
 }
