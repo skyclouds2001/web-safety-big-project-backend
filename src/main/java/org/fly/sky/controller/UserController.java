@@ -24,29 +24,27 @@ public class UserController {
 
     @GetMapping("/{id}")
     public Result getSingleUser(@PathVariable Integer id) {
-        User user = userService.getById(id);
-        return new Result(user != null ? Code.SUCCESS : Code.FAILURE, user);
+        return userService.getById(id);
     }
 
     @GetMapping
     public Result getAllUser() {
-        List<User> users = userService.getAll();
-        return new Result(users != null ? Code.SUCCESS : Code.FAILURE, users);
+        return userService.getAll();
     }
 
     @PostMapping
     public Result addUser(@RequestBody User user) {
-        return new Result(userService.save(user) ? Code.SUCCESS : Code.FAILURE, null);
+        return userService.save(user);
     }
 
     @PutMapping
     public Result updateUser(@RequestBody User user) {
-        return new Result(userService.update(user) ? Code.SUCCESS : Code.FAILURE, null);
+        return userService.update(user);
     }
 
     @DeleteMapping
     public Result removeUser(@RequestParam Integer id) {
-        return new Result(userService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
+        return userService.delete(id);
     }
 
 }

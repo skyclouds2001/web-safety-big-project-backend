@@ -24,29 +24,27 @@ public class TicketController {
 
     @GetMapping("/{id}")
     public Result getSingleTicket(@PathVariable Integer id) {
-        Ticket ticket = ticketService.getById(id);
-        return new Result(ticket != null ? Code.SUCCESS : Code.FAILURE, ticket);
+        return ticketService.getById(id);
     }
 
     @GetMapping
     public Result getAllTicket() {
-        List<Ticket> tickets = ticketService.getAll();
-        return new Result(tickets != null ? Code.SUCCESS : Code.FAILURE, tickets);
+        return ticketService.getAll();
     }
 
     @PostMapping
     public Result addTicket(@RequestBody Ticket ticket) {
-        return new Result(ticketService.save(ticket) ? Code.SUCCESS : Code.FAILURE, null);
+        return ticketService.save(ticket);
     }
 
     @PutMapping
     public Result updateTicket(@RequestBody Ticket ticket) {
-        return new Result(ticketService.update(ticket) ? Code.SUCCESS : Code.FAILURE, null);
+        return ticketService.update(ticket);
     }
 
     @DeleteMapping
     public Result removeTicket(@RequestParam Integer id) {
-        return new Result(ticketService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
+        return ticketService.delete(id);
     }
 
 }

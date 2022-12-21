@@ -1,9 +1,7 @@
 package org.fly.sky.service;
 
-import org.fly.sky.domain.ScenerySpot;
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.Ticket;
-
-import java.util.List;
 
 /**
  * @author CHENSY skyclouds2001@163.com
@@ -12,14 +10,14 @@ import java.util.List;
  */
 public interface TicketService {
 
-    Ticket getById(Integer id);
+    Result getById(Integer id);
 
-    List<Ticket> getAll();
+    Result getAll();
 
-    boolean save(Ticket ticket);
+    Result save(Ticket ticket);
 
-    boolean update(Ticket ticket);
+    Result update(Ticket ticket);
 
-    boolean delete(Integer id);
+    Result delete(Integer id);
 
 }

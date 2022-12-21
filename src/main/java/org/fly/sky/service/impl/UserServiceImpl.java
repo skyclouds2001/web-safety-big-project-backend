@@ -1,6 +1,7 @@
 package org.fly.sky.service.impl;
 
 import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.fly.sky.dao.UserDao;
 import org.fly.sky.domain.User;
 import org.fly.sky.exception.CustomException;
@@ -23,39 +24,42 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据ID获取用户信息
+     *
      * @param id 用户ID
      * @return 用户信息
      */
     @Override
-    public User getById(Integer id) {
+    public Result getById(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         User res = userDao.getById(id);
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
      * 获取全部用户列表
+     *
      * @return 用户列表
      */
     @Override
-    public List<User> getAll() {
+    public Result getAll() {
         List<User> res = userDao.getAll();
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
      * 保存用户信息
+     *
      * @param user 用户信息
      * @return 是否操作成功
      */
     @Override
-    public boolean save(User user) {
+    public Result save(User user) {
         if (user.getName() == null ||
                 user.getPhone() == null ||
                 user.getIdentity() == null ||
@@ -74,16 +78,17 @@ public class UserServiceImpl implements UserService {
         int res = userDao.save(user);
         if (res == 0)
             throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
      * 更新用户信息
+     *
      * @param user 用户信息
      * @return 是否操作成功
      */
     @Override
-    public boolean update(User user) {
+    public Result update(User user) {
         if (user.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
@@ -137,23 +142,24 @@ public class UserServiceImpl implements UserService {
         int res = userDao.update(us);
         if (res == 0)
             throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
      * 移除用户信息
+     *
      * @param id 用户ID
      * @return 是否操作成功
      */
     @Override
-    public boolean delete(Integer id) {
+    public Result delete(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         int res = userDao.delete(id);
         if (res == 0)
             throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
 }

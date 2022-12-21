@@ -1,5 +1,6 @@
 package org.fly.sky.service;
 
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.ScenerySpot;
 
 import java.util.List;
@@ -11,14 +12,14 @@ import java.util.List;
  */
 public interface ScenerySpotService {
 
-    ScenerySpot getById(Integer id);
+    Result getById(Integer id);
 
-    List<ScenerySpot> getAll();
+    Result getAll();
 
-    boolean save(ScenerySpot scenerySpot);
+    Result save(ScenerySpot scenerySpot);
 
-    boolean update(ScenerySpot scenerySpot);
+    Result update(ScenerySpot scenerySpot);
 
-    boolean delete(Integer id);
+    Result delete(Integer id);
 
 }

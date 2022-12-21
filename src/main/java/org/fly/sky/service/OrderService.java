@@ -1,8 +1,7 @@
 package org.fly.sky.service;
 
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.Order;
-
-import java.util.List;
 
 /**
  * @author CHENSY skyclouds2001@163.com
@@ -11,14 +10,14 @@ import java.util.List;
  */
 public interface OrderService {
 
-    Order getById(Integer id);
+    Result getById(Integer id);
 
-    List<Order> getAll();
+    Result getAll();
 
-    boolean save(Order order);
+    Result save(Order order);
 
-    boolean update(Order order);
+    Result update(Order order);
 
-    boolean delete(Integer id);
+    Result delete(Integer id);
 
 }

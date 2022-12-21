@@ -1,6 +1,7 @@
 package org.fly.sky.service.impl;
 
 import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.fly.sky.dao.TicketDao;
 import org.fly.sky.domain.Ticket;
 import org.fly.sky.exception.CustomException;
@@ -23,39 +24,42 @@ public class TicketServiceImpl implements TicketService {
 
     /**
      * 根据ID获取门票信息
+     *
      * @param id 门票ID
      * @return 门票信息
      */
     @Override
-    public Ticket getById(Integer id) {
+    public Result getById(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         Ticket res = ticketDao.getById(id);
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
      * 获取全部门票列表
+     *
      * @return 门票列表
      */
     @Override
-    public List<Ticket> getAll() {
+    public Result getAll() {
         List<Ticket> res = ticketDao.getAll();
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
      * 保存门票信息
+     *
      * @param ticket 门票信息
      * @return 是否操作成功
      */
     @Override
-    public boolean save(Ticket ticket) {
+    public Result save(Ticket ticket) {
         if (ticket.getName() == null)
             throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (ticket.getName().trim().length() == 0)
@@ -67,16 +71,17 @@ public class TicketServiceImpl implements TicketService {
         int res = ticketDao.save(ticket);
         if (res == 0)
             throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
      * 更新门票信息
+     *
      * @param ticket 门票信息
      * @return 是否操作成功
      */
     @Override
-    public boolean update(Ticket ticket) {
+    public Result update(Ticket ticket) {
         if (ticket.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
@@ -106,23 +111,24 @@ public class TicketServiceImpl implements TicketService {
         int res = ticketDao.update(tic);
         if (res == 0)
             throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
      * 移除门票信息
+     *
      * @param id 门票ID
      * @return 是否操作成功
      */
     @Override
-    public boolean delete(Integer id) {
+    public Result delete(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         int res = ticketDao.delete(id);
         if (res == 0)
             throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
 }

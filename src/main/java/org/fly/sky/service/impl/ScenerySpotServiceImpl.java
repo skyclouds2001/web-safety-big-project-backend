@@ -1,6 +1,7 @@
 package org.fly.sky.service.impl;
 
 import org.fly.sky.common.Code;
+import org.fly.sky.common.Result;
 import org.fly.sky.dao.ScenerySpotDao;
 import org.fly.sky.domain.ScenerySpot;
 import org.fly.sky.exception.CustomException;
@@ -27,14 +28,14 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      * @return 景点信息
      */
     @Override
-    public ScenerySpot getById(Integer id) {
+    public Result getById(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         ScenerySpot res = scenerySpotDao.getById(id);
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
@@ -42,11 +43,11 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      * @return 景点列表
      */
     @Override
-    public List<ScenerySpot> getAll() {
+    public Result getAll() {
         List<ScenerySpot> res = scenerySpotDao.getAll();
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
-        return res;
+        return Result.createResult(Code.SUCCESS, res);
     }
 
     /**
@@ -55,7 +56,7 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      * @return 是否操作成功
      */
     @Override
-    public boolean save(ScenerySpot scenerySpot) {
+    public Result save(ScenerySpot scenerySpot) {
         if (scenerySpot.getName() == null ||
                 scenerySpot.getArea() == null)
             throw new CustomException(Code.MISSING_NECESSARY_PARAM);
@@ -66,7 +67,7 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
         int res = scenerySpotDao.save(scenerySpot);
         if (res == 0)
             throw new CustomException(Code.FAIL_INSERT_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
@@ -75,7 +76,7 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      * @return 是否操作成功
      */
     @Override
-    public boolean update(ScenerySpot scenerySpot) {
+    public Result update(ScenerySpot scenerySpot) {
         if (scenerySpot.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
@@ -99,7 +100,7 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
         int res = scenerySpotDao.update(spot);
         if (res == 0)
             throw new CustomException(Code.FAIL_UPDATE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
     /**
@@ -108,14 +109,14 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      * @return 是否操作成功
      */
     @Override
-    public boolean delete(Integer id) {
+    public Result delete(Integer id) {
         if (id <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
         int res = scenerySpotDao.delete(id);
         if (res == 0)
             throw new CustomException(Code.FAIL_DELETE_SQL_OPERATE);
-        return true;
+        return Result.createResult(Code.SUCCESS);
     }
 
 }

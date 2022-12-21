@@ -24,29 +24,27 @@ public class ScenerySpotController {
 
     @GetMapping("/{id}")
     public Result getSingleScenerySpot(@PathVariable Integer id) {
-        ScenerySpot scenerySpot = scenerySpotService.getById(id);
-        return new Result(scenerySpot != null ? Code.SUCCESS : Code.FAILURE, scenerySpot);
+        return scenerySpotService.getById(id);
     }
 
     @GetMapping
     public Result getAllScenerySpot() {
-        List<ScenerySpot> scenerySpots = scenerySpotService.getAll();
-        return new Result(scenerySpots != null ? Code.SUCCESS : Code.FAILURE, scenerySpots);
+        return scenerySpotService.getAll();
     }
 
     @PostMapping
     public Result addScenerySpot(@RequestBody ScenerySpot scenerySpot) {
-        return new Result(scenerySpotService.save(scenerySpot) ? Code.SUCCESS : Code.FAILURE, null);
+        return scenerySpotService.save(scenerySpot);
     }
 
     @PutMapping
     public Result updateScenerySpot(@RequestBody ScenerySpot scenerySpot) {
-        return new Result(scenerySpotService.update(scenerySpot) ? Code.SUCCESS : Code.FAILURE, null);
+        return scenerySpotService.update(scenerySpot);
     }
 
     @DeleteMapping
     public Result removeScenerySpot(@RequestParam Integer id) {
-        return new Result(scenerySpotService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
+        return scenerySpotService.delete(id);
     }
 
 }

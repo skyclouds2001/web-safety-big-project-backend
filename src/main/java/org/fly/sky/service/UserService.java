@@ -1,8 +1,7 @@
 package org.fly.sky.service;
 
+import org.fly.sky.common.Result;
 import org.fly.sky.domain.User;
-
-import java.util.List;
 
 /**
  * @author CHENSY skyclouds2001@163.com
@@ -11,14 +10,14 @@ import java.util.List;
  */
 public interface UserService {
 
-    User getById(Integer id);
+    Result getById(Integer id);
 
-    List<User> getAll();
+    Result getAll();
 
-    boolean save(User user);
+    Result save(User user);
 
-    boolean update(User user);
+    Result update(User user);
 
-    boolean delete(Integer id);
+    Result delete(Integer id);
 
 }

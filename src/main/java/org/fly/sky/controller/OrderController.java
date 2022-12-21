@@ -24,29 +24,27 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public Result getSingleOrder(@PathVariable Integer id) {
-        Order order = orderService.getById(id);
-        return new Result(order != null ? Code.SUCCESS : Code.FAILURE, order);
+        return orderService.getById(id);
     }
 
     @GetMapping
     public Result getAllOrder() {
-        List<Order> orders = orderService.getAll();
-        return new Result(orders != null ? Code.SUCCESS : Code.FAILURE, orders);
+        return orderService.getAll();
     }
 
     @PostMapping
     public Result addOrder(@RequestBody Order order) {
-        return new Result(orderService.save(order) ? Code.SUCCESS : Code.FAILURE, null);
+        return orderService.save(order);
     }
 
     @PutMapping
     public Result updateOrder(@RequestBody Order order) {
-        return new Result(orderService.update(order) ? Code.SUCCESS : Code.FAILURE, null);
+        return orderService.update(order);
     }
 
     @DeleteMapping
     public Result removeOrder(@RequestParam Integer id) {
-        return new Result(orderService.delete(id) ? Code.SUCCESS : Code.FAILURE, null);
+        return orderService.delete(id);
     }
 
 }
