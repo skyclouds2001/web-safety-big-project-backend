@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface OrderDao {
 
-    @Select("select * from order where id = #{id}")
+    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from order where id = #{id}")
     Order getById(Integer id);
 
-    @Select("select * from order")
+    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from order")
     List<Order> getAll();
 
     @Insert("insert into order (time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp) values (#{time}, #{ticketId}, #{amount}, #{cost}, #{customerId}, #{note}, now(), now())")

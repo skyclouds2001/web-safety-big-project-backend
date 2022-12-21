@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface ScenerySpotDao {
 
-    @Select("select * from scenery_spot where id = #{id}")
+    @Select("select id, name, `desc`, area, createTimestamp, updateTimestamp from scenery_spot where id = #{id}")
     ScenerySpot getById(Integer id);
 
-    @Select("select * from scenery_spot")
+    @Select("select id, name, `desc`, area, createTimestamp, updateTimestamp from scenery_spot")
     List<ScenerySpot> getAll();
 
     @Insert("insert into scenery_spot (name, `desc`, area, createTimestamp, updateTimestamp) values (#{name}, #{desc}, #{area}, now(), now())")

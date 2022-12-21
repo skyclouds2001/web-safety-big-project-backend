@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface TicketDao {
 
-    @Select("select * from ticket where id = #{id}")
+    @Select("select id, name, `desc`, type, price, scenerySpotId, createTimestamp, updateTimestamp from ticket where id = #{id}")
     Ticket getById(Integer id);
 
-    @Select("select * from ticket")
+    @Select("select id, name, `desc`, type, price, scenerySpotId, createTimestamp, updateTimestamp from ticket")
     List<Ticket> getAll();
 
     @Insert("insert into ticket (name, `desc`, type, price, scenerySpotId, createTimestamp, updateTimestamp) values (#{name}, #{desc}, #{type}, #{price}, #{scenerySpotId}, now(), now())")

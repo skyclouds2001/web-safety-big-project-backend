@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 
-    @Select("select * from user where id = #{id}")
+    @Select("select id, name, sex, birth, phone, email, identity, address, type, nickname, password, `desc`, createTimestamp, updateTimestamp from user where id = #{id}")
     User getById(Integer id);
 
-    @Select("select * from user")
+    @Select("select id, name, sex, birth, phone, email, identity, address, type, nickname, password, `desc`, createTimestamp, updateTimestamp from user")
     List<User> getAll();
 
     @Insert("insert into user (name, sex, birth, phone, email, identity, address, type, nickname, password, `desc`, createTimestamp, updateTimestamp) values (#{name}, #{sex}, #{birth}, #{phone}, #{email}, #{identity}, #{address}, #{type}, #{nickname}, #{password}, #{desc}, now(), now())")
