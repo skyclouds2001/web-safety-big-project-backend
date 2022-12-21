@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
