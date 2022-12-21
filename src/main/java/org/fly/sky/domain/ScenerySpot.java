@@ -5,7 +5,7 @@ package org.fly.sky.domain;
  * @version 0.0
  * @since 0.0
  */
-public class ScenerySpot {
+public class ScenerySpot implements Cloneable {
 
     /** 景点ID */
     private int id;
@@ -142,6 +142,19 @@ public class ScenerySpot {
         result = 31 * result + (int) (getCreateTimestamp() ^ (getCreateTimestamp() >>> 32));
         result = 31 * result + (int) (getUpdateTimestamp() ^ (getUpdateTimestamp() >>> 32));
         return result;
+    }
+
+    @Override
+    public ScenerySpot clone() {
+        try {
+            ScenerySpot clone = (ScenerySpot) super.clone();
+            clone.name = String.valueOf(this.name);
+            clone.desc = String.valueOf(this.desc);
+            clone.area = String.valueOf(this.area);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
 }

@@ -5,7 +5,7 @@ package org.fly.sky.domain;
  * @version 0.0
  * @since 0.0
  */
-public class Ticket {
+public class Ticket implements Cloneable {
 
     /** 门票ID */
     private int id;
@@ -182,6 +182,18 @@ public class Ticket {
         result = 31 * result + (int) (getCreateTimestamp() ^ (getCreateTimestamp() >>> 32));
         result = 31 * result + (int) (getUpdateTimestamp() ^ (getUpdateTimestamp() >>> 32));
         return result;
+    }
+
+    @Override
+    public Ticket clone() {
+        try {
+            Ticket clone = (Ticket) super.clone();
+            clone.name = String.valueOf(this.name);
+            clone.desc = String.valueOf(this.desc);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
 }

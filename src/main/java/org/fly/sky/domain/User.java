@@ -5,7 +5,7 @@ package org.fly.sky.domain;
  * @version 0.0
  * @since 0.0
  */
-public class User {
+public class User implements Cloneable {
 
     /** 用户ID */
     private int id;
@@ -304,4 +304,22 @@ public class User {
         return result;
     }
 
+    @Override
+    public User clone() {
+        try {
+            User clone = (User) super.clone();
+            clone.name = String.valueOf(this.name);
+            clone.birth = String.valueOf(this.birth);
+            clone.phone = String.valueOf(this.phone);
+            clone.desc = String.valueOf(this.desc);
+            clone.email = String.valueOf(this.email);
+            clone.identity = String.valueOf(this.identity);
+            clone.address = String.valueOf(this.address);
+            clone.nickname = String.valueOf(this.nickname);
+            clone.password = String.valueOf(this.password);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

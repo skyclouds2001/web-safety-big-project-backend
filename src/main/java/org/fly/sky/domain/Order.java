@@ -5,7 +5,7 @@ package org.fly.sky.domain;
  * @version 0.0
  * @since 0.0
  */
-public class Order {
+public class Order implements Cloneable {
 
     /** 订单ID */
     private int id;
@@ -202,6 +202,17 @@ public class Order {
         result = 31 * result + (int) (getCreateTimestamp() ^ (getCreateTimestamp() >>> 32));
         result = 31 * result + (int) (getUpdateTimestamp() ^ (getUpdateTimestamp() >>> 32));
         return result;
+    }
+
+    @Override
+    public Order clone() {
+        try {
+            Order clone = (Order) super.clone();
+            clone.note = String.valueOf(this.note);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
 }
