@@ -19,7 +19,13 @@ public enum Code {
     FAIL_SELECT_SQL_OPERATE(20001, "数据库读取失败"),
     FAIL_UPDATE_SQL_OPERATE(20002, "数据库更新失败"),
     FAIL_DELETE_SQL_OPERATE(20003, "数据库移除失败"),
-    MISSING_DATA_IN_DATABASE(20004, "数据库不存在对应数据");
+    MISSING_DATA_IN_DATABASE(20004, "数据库不存在对应数据"),
+    LOGIN_FAILURE(30000, "账号或密码错误"),
+    DUPLICATE_PASSWORD_FAILURE(30001, "新旧密码不能相同"),
+    INCORRECT_PASSWORD_FAILURE(30002, "密码错误"),
+    INVALID_LENGTH_PASSWORD_FAILURE(30003, "密码长度需超过8"),
+    INVALID_CHARACTER_PASSWORD_FAILURE(30004, "密码仅能由数字和大小写字母构成"),
+    MISSING_CHARACTER_PASSWORD_FAILURE(30005, "密码中必须包含数字和字母");
 
     private boolean success;
 
