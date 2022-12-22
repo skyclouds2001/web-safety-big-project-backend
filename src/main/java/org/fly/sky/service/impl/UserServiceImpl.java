@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
         User res = userDao.getById(id);
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        res.setPassword("********");
         return Result.createResult(Code.SUCCESS, res);
     }
 
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
         List<User> res = userDao.getAll();
         if (res == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
+        res.forEach(v -> v.setPassword("********"));
         return Result.createResult(Code.SUCCESS, res);
     }
 
