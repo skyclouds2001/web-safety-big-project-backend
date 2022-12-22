@@ -8,7 +8,7 @@ package org.fly.sky.domain;
 public class ScenerySpot implements Cloneable {
 
     /** 景点ID */
-    private int id;
+    private Integer id;
 
     /** 景点名称 */
     private String name;
@@ -27,7 +27,7 @@ public class ScenerySpot implements Cloneable {
 
     private ScenerySpot() {}
 
-    public ScenerySpot(int id, String name, String desc, String area, long createTimestamp, long updateTimestamp) {
+    public ScenerySpot(Integer id, String name, String desc, String area, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -40,15 +40,15 @@ public class ScenerySpot implements Cloneable {
         return new ScenerySpot();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public ScenerySpot id(int id) {
+    public ScenerySpot id(Integer id) {
         this.id = id;
         return this;
     }
@@ -125,7 +125,7 @@ public class ScenerySpot implements Cloneable {
         if (this == o) return true;
         if (!(o instanceof ScenerySpot that)) return false;
 
-        if (getId() != that.getId()) return false;
+        if (getId().intValue() != that.getId().intValue()) return false;
         if (getCreateTimestamp() != that.getCreateTimestamp()) return false;
         if (getUpdateTimestamp() != that.getUpdateTimestamp()) return false;
         if (!getName().equals(that.getName())) return false;

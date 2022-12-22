@@ -61,8 +61,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result save(User user) {
         if (user.getName() == null ||
+                user.getSex() == null ||
                 user.getPhone() == null ||
                 user.getIdentity() == null ||
+                user.getType() == null ||
                 user.getNickname() == null ||
                 user.getPassword() == null)
             throw new CustomException(Code.MISSING_NECESSARY_PARAM);
@@ -72,7 +74,8 @@ public class UserServiceImpl implements UserService {
                 user.getNickname().trim().length() == 0 ||
                 user.getPassword().trim().length() == 0)
             throw new CustomException(Code.EMPTY_STRING_PARAM);
-        if (user.getType() != 0 && user.getType() != 1 || user.getSex() != 0 && user.getSex() != 1)
+        if (user.getType() != 0 && user.getType() != 1 ||
+                user.getSex() != 0 && user.getSex() != 1)
             throw new CustomException(Code.INCORRECT_RANGE_PARAM);
 
         int res = userDao.save(user);
@@ -126,10 +129,17 @@ public class UserServiceImpl implements UserService {
             else
                 us.setPassword(user.getPassword());
         }
-        if (user.getSex() == 0 || user.getSex() == 1)
-            us.setSex(user.getSex());
-        if (user.getType() == 0 || user.getType() == 1)
-            us.setType(user.getType());
+        if (user.getSex() != null) {
+            if (user.getSex() == 0 || user.getSex() == 1)
+                us.setSex(user.getSex());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (user.getType() != null)
+            if (user.getType() == 0 || user.getType() == 1)
+                us.setType(user.getType());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
         if (user.getBirth() != null && user.getBirth().trim().length() > 0)
             us.setBirth(user.getBirth());
         if (user.getDesc() != null && user.getDesc().trim().length() > 0)

@@ -8,7 +8,7 @@ package org.fly.sky.domain;
 public class Ticket implements Cloneable {
 
     /** 门票ID */
-    private int id;
+    private Integer id;
 
     /** 门票名称 */
     private String name;
@@ -17,13 +17,13 @@ public class Ticket implements Cloneable {
     private String desc;
 
     /** 门票类型 | 0-成人票 1-儿童票 2-其他 */
-    private int type;
+    private Integer type;
 
     /** 门票价格 */
-    private int price;
+    private Integer price;
 
     /** 所属景点ID */
-    private int scenerySpotId;
+    private Integer scenerySpotId;
 
     /** 门票创建时间戳 */
     private long createTimestamp;
@@ -33,7 +33,7 @@ public class Ticket implements Cloneable {
 
     private Ticket() {}
 
-    public Ticket(int id, String name, String desc, int type, int price, int scenerySpotId, long createTimestamp, long updateTimestamp) {
+    public Ticket(Integer id, String name, String desc, Integer type, Integer price, Integer scenerySpotId, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -48,15 +48,15 @@ public class Ticket implements Cloneable {
         return new Ticket();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Ticket id(int id) {
+    public Ticket id(Integer id) {
         this.id = id;
         return this;
     }
@@ -87,41 +87,41 @@ public class Ticket implements Cloneable {
         return this;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public Ticket type(int type) {
+    public Ticket type(Integer type) {
         this.type = type;
         return this;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Ticket price(int price) {
+    public Ticket price(Integer price) {
         this.price = price;
         return this;
     }
 
-    public int getScenerySpotId() {
+    public Integer getScenerySpotId() {
         return scenerySpotId;
     }
 
-    public void setScenerySpotId(int scenerySpotId) {
+    public void setScenerySpotId(Integer scenerySpotId) {
         this.scenerySpotId = scenerySpotId;
     }
 
-    public Ticket scenerySpotId(int scenerySpotId) {
+    public Ticket scenerySpotId(Integer scenerySpotId) {
         this.scenerySpotId = scenerySpotId;
         return this;
     }
@@ -161,10 +161,10 @@ public class Ticket implements Cloneable {
         if (this == o) return true;
         if (!(o instanceof Ticket ticket)) return false;
 
-        if (getId() != ticket.getId()) return false;
-        if (getType() != ticket.getType()) return false;
-        if (getPrice() != ticket.getPrice()) return false;
-        if (getScenerySpotId() != ticket.getScenerySpotId()) return false;
+        if (getId().intValue() != ticket.getId().intValue()) return false;
+        if (getType().intValue() != ticket.getType().intValue()) return false;
+        if (getPrice().intValue() != ticket.getPrice().intValue()) return false;
+        if (getScenerySpotId().intValue() != ticket.getScenerySpotId().intValue()) return false;
         if (getCreateTimestamp() != ticket.getCreateTimestamp()) return false;
         if (getUpdateTimestamp() != ticket.getUpdateTimestamp()) return false;
         if (!getName().equals(ticket.getName())) return false;

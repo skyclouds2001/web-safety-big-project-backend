@@ -60,12 +60,17 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public Result save(Ticket ticket) {
-        if (ticket.getName() == null)
+        if (ticket.getName() == null ||
+                ticket.getType() == null ||
+                ticket.getPrice() == null ||
+                ticket.getScenerySpotId() == null)
             throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (ticket.getName().trim().length() == 0)
             throw new CustomException(Code.EMPTY_STRING_PARAM);
         if (ticket.getPrice() < 0 ||
-                ticket.getType() < 0 || ticket.getType() > 2)
+                ticket.getType() < 0 ||
+                ticket.getType() > 2 ||
+                ticket.getScenerySpotId() <= 0)
             throw new CustomException(Code.INCORRECT_RANGE_PARAM);
 
         int res = ticketDao.save(ticket);
@@ -95,18 +100,24 @@ public class TicketServiceImpl implements TicketService {
             else
                 tic.setName(ticket.getName());
         }
-        if (ticket.getType() >= 0 && ticket.getType() <= 2)
-            tic.setType(ticket.getType());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (ticket.getPrice() >= 0)
-            tic.setPrice(ticket.getPrice());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (ticket.getScenerySpotId() > 0)
-            tic.setScenerySpotId(ticket.getScenerySpotId());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        if (ticket.getType() != null) {
+            if (ticket.getType() >= 0 && ticket.getType() <= 2)
+                tic.setType(ticket.getType());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (ticket.getPrice() != null) {
+            if (ticket.getPrice() >= 0)
+                tic.setPrice(ticket.getPrice());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (ticket.getScenerySpotId() != null) {
+            if (ticket.getScenerySpotId() > 0)
+                tic.setScenerySpotId(ticket.getScenerySpotId());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
 
         int res = ticketDao.update(tic);
         if (res == 0)

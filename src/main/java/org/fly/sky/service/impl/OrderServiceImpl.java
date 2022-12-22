@@ -60,6 +60,12 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Result save(Order order) {
+        if (order.getTime() == null ||
+                order.getTicketId() == null ||
+                order.getAmount() == null ||
+                order.getCustomerId() == null ||
+                order.getCost() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (order.getTime() < 10000000 ||
                 order.getTime() > 99999999 ||
                 order.getTicketId() < 0 ||
@@ -89,26 +95,36 @@ public class OrderServiceImpl implements OrderService {
         if (ord == null)
             throw new CustomException(Code.FAIL_SELECT_SQL_OPERATE);
 
-        if (order.getTime() >= 10000000 || order.getTime() <= 99999999)
-            ord.setTime(order.getTime());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (order.getTicketId() > 0)
-            ord.setTicketId(order.getTicketId());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (order.getAmount() > 0)
-            ord.setAmount(order.getAmount());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (order.getCustomerId() > 0)
-            ord.setCustomerId(order.getCustomerId());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        if (order.getCost() > 0)
-            ord.setCost(order.getCost());
-        else
-            throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        if (order.getTime() != null) {
+            if (order.getTime() >= 10000000 || order.getTime() <= 99999999)
+                ord.setTime(order.getTime());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (order.getTicketId() != null) {
+            if (order.getTicketId() > 0)
+                ord.setTicketId(order.getTicketId());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (order.getAmount() != null) {
+            if (order.getAmount() > 0)
+                ord.setAmount(order.getAmount());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (order.getCustomerId() != null) {
+            if (order.getCustomerId() > 0)
+                ord.setCustomerId(order.getCustomerId());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
+        if (order.getCost() != null) {
+            if (order.getCost() > 0)
+                ord.setCost(order.getCost());
+            else
+                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        }
 
         int res = orderDao.update(order);
         if (res == 0)

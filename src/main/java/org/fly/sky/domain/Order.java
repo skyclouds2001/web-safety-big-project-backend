@@ -8,22 +8,22 @@ package org.fly.sky.domain;
 public class Order implements Cloneable {
 
     /** 订单ID */
-    private int id;
+    private Integer id;
 
     /** 预定日期 | 格式YYYYMMSS */
-    private int time;
+    private Integer time;
 
     /** 所属门票ID */
-    private int ticketId;
+    private Integer ticketId;
 
     /** 购买门票数量 */
-    private int amount;
+    private Integer amount;
 
     /** 所属客户ID */
-    private int customerId;
+    private Integer customerId;
 
     /** 订单总金额 */
-    private int cost;
+    private Integer cost;
 
     /** 订单备注 | 允许为空 */
     private String note;
@@ -36,7 +36,7 @@ public class Order implements Cloneable {
 
     private Order() {}
 
-    public Order(int id, int time, int ticketId, int amount, int customerId, int cost, String note, long createTimestamp, long updateTimestamp) {
+    public Order(Integer id, Integer time, Integer ticketId, Integer amount, Integer customerId, Integer cost, String note, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.time = time;
         this.ticketId = ticketId;
@@ -52,80 +52,80 @@ public class Order implements Cloneable {
         return new Order();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Order id(int id) {
+    public Order id(Integer id) {
         this.id = id;
         return this;
     }
 
-    public int getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 
-    public Order time(int time) {
+    public Order time(Integer time) {
         this.time = time;
         return this;
     }
 
-    public int getTicketId() {
+    public Integer getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(int ticketId) {
+    public void setTicketId(Integer ticketId) {
         this.ticketId = ticketId;
     }
 
-    public Order ticket(int ticketId) {
+    public Order ticket(Integer ticketId) {
         this.ticketId = ticketId;
         return this;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public Order amount(int amount) {
+    public Order amount(Integer amount) {
         this.amount = amount;
         return this;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
-    public Order customerId(int customerId) {
+    public Order customerId(Integer customerId) {
         this.customerId = customerId;
         return this;
     }
 
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 
-    public Order cost(int cost) {
+    public Order cost(Integer cost) {
         this.cost = cost;
         return this;
     }
@@ -179,12 +179,12 @@ public class Order implements Cloneable {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
 
-        if (getId() != order.getId()) return false;
-        if (getTime() != order.getTime()) return false;
-        if (getTicketId() != order.getTicketId()) return false;
-        if (getAmount() != order.getAmount()) return false;
-        if (getCustomerId() != order.getCustomerId()) return false;
-        if (getCost() != order.getCost()) return false;
+        if (getId().intValue() != order.getId().intValue()) return false;
+        if (getTime().intValue() != order.getTime().intValue()) return false;
+        if (getTicketId().intValue() != order.getTicketId().intValue()) return false;
+        if (getAmount().intValue() != order.getAmount().intValue()) return false;
+        if (getCustomerId().intValue() != order.getCustomerId().intValue()) return false;
+        if (getCost().intValue() != order.getCost().intValue()) return false;
         if (getCreateTimestamp() != order.getCreateTimestamp()) return false;
         if (getUpdateTimestamp() != order.getUpdateTimestamp()) return false;
         return getNote() != null ? getNote().equals(order.getNote()) : order.getNote() == null;

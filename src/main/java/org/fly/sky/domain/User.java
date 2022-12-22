@@ -8,13 +8,13 @@ package org.fly.sky.domain;
 public class User implements Cloneable {
 
     /** 用户ID */
-    private int id;
+    private Integer id;
 
     /** 用户姓名 */
     private String name;
 
     /** 用户性别 | 0-男 1-女 | 允许为空 */
-    private int sex;
+    private Integer sex;
 
     /** 用户出生日期 | 允许为空 */
     private String birth;
@@ -35,7 +35,7 @@ public class User implements Cloneable {
     private String address;
 
     /** 用户类型 0-普通用户 1-管理员 */
-    private int type;
+    private Integer type;
 
     /** 账号昵称 */
     private String nickname;
@@ -51,7 +51,7 @@ public class User implements Cloneable {
 
     private User() {}
 
-    public User(int id, String name, int sex, String birth, String phone, String desc, String email, String identity, String address, int type, String nickname, String password, long createTimestamp, long updateTimestamp) {
+    public User(Integer id, String name, Integer sex, String birth, String phone, String desc, String email, String identity, String address, Integer type, String nickname, String password, long createTimestamp, long updateTimestamp) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -72,15 +72,15 @@ public class User implements Cloneable {
         return new User();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public User id(int id) {
+    public User id(Integer id) {
         this.id = id;
         return this;
     }
@@ -98,15 +98,15 @@ public class User implements Cloneable {
         return this;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public User sex(int sex) {
+    public User sex(Integer sex) {
         this.sex = sex;
         return this;
     }
@@ -189,15 +189,15 @@ public class User implements Cloneable {
         return this;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public User type(int type) {
+    public User type(Integer type) {
         this.type = type;
         return this;
     }
@@ -269,9 +269,9 @@ public class User implements Cloneable {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
 
-        if (getId() != user.getId()) return false;
-        if (getSex() != user.getSex()) return false;
-        if (getType() != user.getType()) return false;
+        if (getId().intValue() != user.getId().intValue()) return false;
+        if (getSex().intValue() != user.getSex().intValue()) return false;
+        if (getType().intValue() != user.getType().intValue()) return false;
         if (getCreateTimestamp() != user.getCreateTimestamp()) return false;
         if (getUpdateTimestamp() != user.getUpdateTimestamp()) return false;
         if (!getName().equals(user.getName())) return false;
