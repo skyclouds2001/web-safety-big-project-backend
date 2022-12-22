@@ -21,20 +21,20 @@ public class Result {
 
     private Object data;
 
-    public Result() {
-        this(null);
+    private Result() {
+        this(UNKNOWN);
     }
 
-    public Result(Object data) {
-        this(UNKNOWN.getCode(), UNKNOWN.getMessage(), data);
-    }
-
-    public Result(int code, String message, Object data) {
-        this(code == SUCCESS.getCode(), code, message, data);
+    public Result(Code code) {
+        this(code, null);
     }
 
     public Result(Code code, Object data) {
         this(code.getCode(), code.getMessage(), data);
+    }
+
+    public Result(int code, String message, Object data) {
+        this(code == SUCCESS.getCode(), code, message, data);
     }
 
     public Result(boolean success, int code, String message, Object data) {
@@ -42,15 +42,6 @@ public class Result {
         this.code = code;
         this.message = message;
         this.data = data;
-    }
-
-    public static Result create() {
-        Result result = new Result();
-        result.setSuccess(UNKNOWN.isSuccess());
-        result.setCode(UNKNOWN.getCode());
-        result.setMessage(UNKNOWN.getMessage());
-        result.setData(null);
-        return result;
     }
 
     public boolean isSuccess() {
@@ -93,6 +84,23 @@ public class Result {
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
+    }
+
+    public static Result createResult() {
+        return createResult(UNKNOWN);
+    }
+
+    public static Result createResult(Code code) {
+        return createResult(code, null);
+    }
+
+    public static Result createResult(Code code, Object data) {
+        Result result = new Result();
+        result.setSuccess(code.isSuccess());
+        result.setCode(code.getCode());
+        result.setMessage(code.getMessage());
+        result.setData(data);
+        return result;
     }
 
     public Result ok() {
