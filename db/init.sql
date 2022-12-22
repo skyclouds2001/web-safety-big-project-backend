@@ -61,5 +61,6 @@ CREATE TABLE user  (
      `password` varchar(255) NOT NULL COMMENT '账号密码',
      `createTimestamp` bigint UNSIGNED NOT NULL COMMENT '客户创建时间戳',
      `updateTimestamp` bigint UNSIGNED NOT NULL COMMENT '客户更新时间戳',
+     UNIQUE (phone, identity),
      PRIMARY KEY (`id`)
 );
