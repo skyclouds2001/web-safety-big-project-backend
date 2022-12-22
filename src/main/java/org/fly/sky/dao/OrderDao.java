@@ -13,19 +13,19 @@ import java.util.List;
 @Mapper
 public interface OrderDao {
 
-    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from order where id = #{id}")
+    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from `order` where id = #{id}")
     Order getById(Integer id);
 
-    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from order")
+    @Select("select id, time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp from `order`")
     List<Order> getAll();
 
-    @Insert("insert into order (time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp) values (#{time}, #{ticketId}, #{amount}, #{cost}, #{customerId}, #{note}, now(), now())")
+    @Insert("insert into `order` (time, ticketId, amount, cost, customerId, note, createTimestamp, updateTimestamp) values (#{time}, #{ticketId}, #{amount}, #{cost}, #{customerId}, #{note}, now(), now())")
     int save(Order order);
 
-    @Update("update order set (time = #{time}, ticketId = #{ticketId}, amount = #{amount}, cost = #{cost}, customerId = #{customerId}, note = #{note}, updateTimestamp = now() where id = #{id}")
+    @Update("update `order` set (time = #{time}, ticketId = #{ticketId}, amount = #{amount}, cost = #{cost}, customerId = #{customerId}, note = #{note}, updateTimestamp = now() where id = #{id}")
     int update(Order order);
 
-    @Delete("delete from order where id = #{id}")
+    @Delete("delete from `order` where id = #{id}")
     int delete(Integer id);
 
 }
