@@ -1,13 +1,10 @@
 package org.fly.sky.controller;
 
-import org.fly.sky.common.Code;
 import org.fly.sky.common.Result;
 import org.fly.sky.domain.ScenerySpot;
 import org.fly.sky.service.ScenerySpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author CHENSY skyclouds2001@163.com
