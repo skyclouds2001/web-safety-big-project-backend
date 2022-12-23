@@ -22,7 +22,7 @@ public interface ScenerySpotDao {
     @Insert("insert into scenery_spot (name, `desc`, area, createTimestamp, updateTimestamp) values (#{name}, #{desc}, #{area}, now(), now())")
     int save(ScenerySpot scenerySpot);
 
-    @Update("update scenery_spot set name = #{name}, `desc` = #{desc}, updateTimestamp = now() where id = #{id}")
+    @Update("update scenery_spot set name = #{name}, `desc` = #{desc}, area = #{area}, updateTimestamp = now() where id = #{id}")
     int update(ScenerySpot scenerySpot);
 
     @Delete("delete from scenery_spot where id = #{id}")
