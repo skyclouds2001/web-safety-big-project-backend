@@ -106,6 +106,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Result update(User user) {
+        if (user.getId() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (user.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 

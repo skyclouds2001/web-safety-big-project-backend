@@ -88,6 +88,8 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Result update(Order order) {
+        if (order.getId() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (order.getId() < 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 

@@ -77,6 +77,8 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
      */
     @Override
     public Result update(ScenerySpot scenerySpot) {
+        if (scenerySpot.getId() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (scenerySpot.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 

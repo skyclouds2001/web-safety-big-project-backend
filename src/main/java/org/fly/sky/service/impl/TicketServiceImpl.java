@@ -87,6 +87,8 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public Result update(Ticket ticket) {
+        if (ticket.getId() == null)
+            throw new CustomException(Code.MISSING_NECESSARY_PARAM);
         if (ticket.getId() <= 0)
             throw new CustomException(Code.INCORRECT_INDEX_PARAM);
 
