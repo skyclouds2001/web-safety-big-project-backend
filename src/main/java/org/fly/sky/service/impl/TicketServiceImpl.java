@@ -112,12 +112,6 @@ public class TicketServiceImpl implements TicketService {
             else
                 throw new CustomException(Code.INCORRECT_RANGE_PARAM);
         }
-        if (ticket.getScenerySpotId() != null) {
-            if (ticket.getScenerySpotId() > 0)
-                tic.setScenerySpotId(ticket.getScenerySpotId());
-            else
-                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        }
 
         int res = ticketDao.update(tic);
         if (res == 0)
