@@ -18,13 +18,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping
+    @PostMapping("/login")
     public Result login(@RequestParam String phone, @RequestParam String password) {
         return adminService.login(phone, password);
     }
 
-    @PostMapping
+    @PostMapping("/reset")
     public Result reset(@RequestParam Integer id, @RequestParam String phone, @RequestParam String oldPassword, @RequestParam String newPassword) {
         return adminService.reset(id, phone, oldPassword, newPassword);
     }
+
 }
