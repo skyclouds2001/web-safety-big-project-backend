@@ -7,6 +7,7 @@ public class CustomException extends RuntimeException {
     private final Code code;
 
     public CustomException(Code code) {
+        super();
         this.code = code;
     }
 
