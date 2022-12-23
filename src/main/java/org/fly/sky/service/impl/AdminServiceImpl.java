@@ -5,8 +5,11 @@ import org.fly.sky.common.Result;
 import org.fly.sky.dao.AdminDao;
 import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.AdminService;
+import org.fly.sky.util.CheckValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.regex.Pattern;
 
 /**
  * @author CHENSY skyclouds2001@163.com
@@ -57,6 +60,13 @@ public class AdminServiceImpl implements AdminService {
         String pw = adminDao.login(phone).getPassword();
         if (!oldPassword.equals(pw))
             throw new CustomException(Code.INCORRECT_PASSWORD_FAILURE);
+
+        if (newPassword.trim().length() < 8)
+            throw new CustomException(Code.INVALID_LENGTH_PASSWORD_FAILURE);
+        if (!Pattern.matches("^[a-z0-9A-Z]+$", newPassword))
+            throw new CustomException(Code.INVALID_CHARACTER_PASSWORD_FAILURE);
+        if (!CheckValidate.isValidatePassword(newPassword))
+            throw new CustomException(Code.MISSING_CHARACTER_PASSWORD_FAILURE);
 
         int res = adminDao.reset(id, newPassword);
         if (res == 0)
