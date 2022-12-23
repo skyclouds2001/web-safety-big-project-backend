@@ -101,12 +101,6 @@ public class OrderServiceImpl implements OrderService {
             else
                 throw new CustomException(Code.INCORRECT_RANGE_PARAM);
         }
-        if (order.getTicketId() != null) {
-            if (order.getTicketId() > 0)
-                ord.setTicketId(order.getTicketId());
-            else
-                throw new CustomException(Code.INCORRECT_RANGE_PARAM);
-        }
         if (order.getAmount() != null) {
             if (order.getAmount() > 0)
                 ord.setAmount(order.getAmount());
