@@ -6,10 +6,12 @@ import org.fly.sky.dao.UserDao;
 import org.fly.sky.domain.User;
 import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.UserService;
+import org.fly.sky.util.CheckValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author CHENSY skyclouds2001@163.com
@@ -79,6 +81,16 @@ public class UserServiceImpl implements UserService {
         if (user.getType() != 0 && user.getType() != 1 ||
                 user.getSex() != 0 && user.getSex() != 1)
             throw new CustomException(Code.INCORRECT_RANGE_PARAM);
+        if (!CheckValidate.isValidatePhone(user.getPhone()))
+            throw new CustomException(Code.INVALID_PHONE_FAILURE);
+        if (!CheckValidate.isValidateEmail(user.getEmail()))
+            throw new CustomException(Code.INVALID_EMAIL_FAILURE);
+        if (user.getPassword().trim().length() < 8)
+            throw new CustomException(Code.INVALID_LENGTH_PASSWORD_FAILURE);
+        if (!Pattern.matches("^[a-z0-9A-Z]+$", user.getPassword()))
+            throw new CustomException(Code.INVALID_CHARACTER_PASSWORD_FAILURE);
+        if (!CheckValidate.isValidatePassword(user.getPassword()))
+            throw new CustomException(Code.MISSING_CHARACTER_PASSWORD_FAILURE);
 
         int res = userDao.save(user);
         if (res == 0)
@@ -110,6 +122,8 @@ public class UserServiceImpl implements UserService {
         if (user.getPhone() != null) {
             if (user.getPhone().trim().length() == 0)
                 throw new CustomException(Code.EMPTY_STRING_PARAM);
+            else if (CheckValidate.isValidatePhone(user.getPhone()))
+                throw new CustomException(Code.INVALID_PHONE_FAILURE);
             else
                 us.setPhone(user.getPhone());
         }
@@ -124,12 +138,6 @@ public class UserServiceImpl implements UserService {
                 throw new CustomException(Code.EMPTY_STRING_PARAM);
             else
                 us.setNickname(user.getNickname());
-        }
-        if (user.getPassword() != null) {
-            if (user.getPassword().trim().length() == 0)
-                throw new CustomException(Code.EMPTY_STRING_PARAM);
-            else
-                us.setPassword(user.getPassword());
         }
         if (user.getSex() != null) {
             if (user.getSex() == 0 || user.getSex() == 1)
@@ -146,7 +154,7 @@ public class UserServiceImpl implements UserService {
             us.setBirth(user.getBirth());
         if (user.getDesc() != null && user.getDesc().trim().length() > 0)
             us.setDesc(user.getDesc());
-        if (user.getEmail() != null && user.getEmail().trim().length() > 0)
+        if (user.getEmail() != null && user.getEmail().trim().length() > 0 && CheckValidate.isValidateEmail(user.getEmail()))
             us.setEmail(user.getEmail());
         if (user.getAddress() != null && user.getAddress().trim().length() > 0)
             us.setAddress(user.getAddress());
