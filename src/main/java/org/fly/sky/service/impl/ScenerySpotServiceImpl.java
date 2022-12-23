@@ -96,6 +96,8 @@ public class ScenerySpotServiceImpl implements ScenerySpotService {
             else
                 spot.setArea(scenerySpot.getArea());
         }
+        if (scenerySpot.getDesc() != null)
+            spot.setDesc(scenerySpot.getDesc());
 
         int res = scenerySpotDao.update(spot);
         if (res == 0)
