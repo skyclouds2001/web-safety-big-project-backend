@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
         if (user.getPhone() != null) {
             if (user.getPhone().trim().length() == 0)
                 throw new CustomException(Code.EMPTY_STRING_PARAM);
-            else if (CheckValidate.isValidatePhone(user.getPhone()))
+            else if (!CheckValidate.isValidatePhone(user.getPhone()))
                 throw new CustomException(Code.INVALID_PHONE_FAILURE);
             else
                 us.setPhone(user.getPhone());
