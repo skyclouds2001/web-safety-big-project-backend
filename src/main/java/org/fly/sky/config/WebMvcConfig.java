@@ -12,14 +12,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 0.0
  */
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
     GlobalInterceptor globalInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(globalInterceptor).addPathPatterns("/*");
+        registry
+                .addInterceptor(globalInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/admin/*");
     }
 
 }
