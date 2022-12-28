@@ -3,9 +3,11 @@ package org.fly.sky.service.impl;
 import org.fly.sky.common.Code;
 import org.fly.sky.common.Result;
 import org.fly.sky.dao.AdminDao;
+import org.fly.sky.domain.User;
 import org.fly.sky.exception.CustomException;
 import org.fly.sky.service.AdminService;
 import org.fly.sky.util.CheckValidate;
+import org.fly.sky.util.GenerateToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +37,10 @@ public class AdminServiceImpl implements AdminService {
         if (phone.trim().length() == 0 || password.trim().length() == 0)
             throw new CustomException(Code.EMPTY_STRING_PARAM);
 
-        String pw = adminDao.login(phone).getPassword();
-        if (!pw.equals(password))
+        User user = adminDao.login(phone);
+        if (user == null || !user.getPassword().equals(password))
             throw new CustomException(Code.LOGIN_FAILURE);
-        return Result.createResult(Code.SUCCESS);
+        return Result.createResult(Code.SUCCESS, GenerateToken.getToken());
     }
 
     /**

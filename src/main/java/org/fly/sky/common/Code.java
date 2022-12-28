@@ -28,7 +28,8 @@ public enum Code {
     MISSING_CHARACTER_PASSWORD_FAILURE(30005, "密码中必须包含数字和大小写字母中的三种"),
     INVALID_EMAIL_FAILURE(30006, "邮箱格式非法"),
     INVALID_PHONE_FAILURE(30007, "电话格式非法"),
-    INVALID_IDENTITY_FAILURE(30008, "身份证号码格式非法");
+    INVALID_IDENTITY_FAILURE(30008, "身份证号码格式非法"),
+    NEED_LOGIN_FAILURE(40000, "未登录");
 
     private boolean success;
 
