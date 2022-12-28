@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Objects;
+
 @Component
 public class GlobalInterceptor implements HandlerInterceptor {
 
@@ -16,7 +18,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println(request.getHeader("Authorization"));
         String authorization = request.getHeader("Authorization");
-        if (!GenerateToken.hasToken(authorization))
+        if (!Objects.equals(request.getMethod(), "OPTIONS") && !GenerateToken.hasToken(authorization))
             throw new CustomException(Code.NEED_LOGIN_FAILURE);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
