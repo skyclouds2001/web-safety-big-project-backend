@@ -1,11 +1,17 @@
 package org.fly.sky.common;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * @author CHENSY skyclouds2001@163.com
  * @version 0.0
  * @since 0.0
  */
-public class Result {
+public class Result implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final Code UNKNOWN = Code.UNKNOWN;
 
@@ -131,6 +137,17 @@ public class Result {
     public Result data(Object data) {
         this.setData(data);
         return this;
+    }
+
+    @Override
+    public Result clone() {
+        try {
+            Result clone = (Result) super.clone();
+            clone.message = String.valueOf(this.message);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
 }

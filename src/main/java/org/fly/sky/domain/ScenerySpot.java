@@ -1,11 +1,17 @@
 package org.fly.sky.domain;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * @author CHENSY skyclouds2001@163.com
  * @version 0.0
  * @since 0.0
  */
-public class ScenerySpot implements Cloneable {
+public class ScenerySpot implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /** 景点ID */
     private Integer id;

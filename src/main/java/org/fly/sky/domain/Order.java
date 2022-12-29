@@ -1,11 +1,17 @@
 package org.fly.sky.domain;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * @author CHENSY skyclouds2001@163.com
  * @version 0.0
  * @since 0.0
  */
-public class Order implements Cloneable {
+public class Order implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /** 订单ID */
     private Integer id;
