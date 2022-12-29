@@ -52,7 +52,7 @@ CREATE TABLE user  (
      `sex` tinyint NULL COMMENT '用户性别' CHECK ( sex in (0, 1) ),
      `birth` varchar(255) NULL COMMENT '用户出生日期',
      `phone` varchar(255) NOT NULL COMMENT '用户电话号码',
-     `desc` varchar(255) NULL COMMENT '门票描述',
+     `desc` varchar(255) NULL COMMENT '用户简介',
      `email` varchar(255) NULL COMMENT '用户邮箱',
      `identity` varchar(255) NOT NULL COMMENT '用户身份证号码',
      `address` varchar(255) NULL COMMENT '用户居住地址',
