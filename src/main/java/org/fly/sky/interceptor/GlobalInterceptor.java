@@ -16,9 +16,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(request.getHeader("Authorization"));
-        String authorization = request.getHeader("Authorization");
-        if (!Objects.equals(request.getMethod(), "OPTIONS") && !GenerateToken.hasToken(authorization))
+        if (!Objects.equals(request.getMethod(), "OPTIONS") && !GenerateToken.hasToken(request.getHeader("Authorization")))
             throw new CustomException(Code.NEED_LOGIN_FAILURE);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
