@@ -2,6 +2,11 @@ package org.fly.sky.util;
 
 import java.util.regex.Pattern;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 public class CheckValidate {
 
     private CheckValidate() {}

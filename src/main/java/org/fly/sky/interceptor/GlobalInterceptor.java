@@ -11,6 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Objects;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 @Component
 public class GlobalInterceptor implements HandlerInterceptor {
 

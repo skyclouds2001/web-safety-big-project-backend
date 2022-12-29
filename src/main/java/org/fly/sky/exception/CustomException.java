@@ -2,6 +2,11 @@ package org.fly.sky.exception;
 
 import org.fly.sky.common.Code;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 public class CustomException extends RuntimeException {
 
     private final Code code;

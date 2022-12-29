@@ -7,6 +7,11 @@ import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author CHENSY skyclouds2001@163.com
+ * @version 0.0
+ * @since 0.0
+ */
 @Configuration
 public class SwaggerConfig {
 
