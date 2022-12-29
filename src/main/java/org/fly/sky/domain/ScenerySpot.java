@@ -1,5 +1,8 @@
 package org.fly.sky.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -8,27 +11,28 @@ import java.io.Serializable;
  * @version 0.0
  * @since 0.0
  */
+@Schema(description = "景点")
 public class ScenerySpot implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /** 景点ID */
+    @Schema(description = "景点ID")
     private Integer id;
 
-    /** 景点名称 */
+    @Schema(description = "景点名称", requiredMode = RequiredMode.REQUIRED)
     private String name;
 
-    /** 景点描述 | 允许为空 */
+    @Schema(description = "景点描述", requiredMode = RequiredMode.NOT_REQUIRED)
     private String desc;
 
-    /** 景点地点 | 格式-省市县 */
+    @Schema(description = "景点地点", requiredMode = RequiredMode.REQUIRED)
     private String area;
 
-    /** 景点创建时间戳 */
+    @Schema(description = "景点创建时间戳")
     private long createTimestamp;
 
-    /** 景点更新时间戳 */
+    @Schema(description = "景点更新时间戳")
     private long updateTimestamp;
 
     private ScenerySpot() {}

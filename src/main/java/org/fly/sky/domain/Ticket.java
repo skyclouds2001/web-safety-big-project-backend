@@ -1,5 +1,8 @@
 package org.fly.sky.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -8,33 +11,34 @@ import java.io.Serializable;
  * @version 0.0
  * @since 0.0
  */
+@Schema(description = "门票")
 public class Ticket implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /** 门票ID */
+    @Schema(description = "门票ID")
     private Integer id;
 
-    /** 门票名称 */
+    @Schema(description = "门票名称", requiredMode = RequiredMode.REQUIRED)
     private String name;
 
-    /** 门票描述 | 允许为空 */
+    @Schema(description = "门票描述", requiredMode = RequiredMode.NOT_REQUIRED)
     private String desc;
 
-    /** 门票类型 | 0-成人票 1-儿童票 2-其他 */
+    @Schema(description = "门票类型 | 0-成人票 1-儿童票 2-其他", requiredMode = RequiredMode.REQUIRED)
     private Integer type;
 
-    /** 门票价格 */
+    @Schema(description = "门票价格", requiredMode = RequiredMode.REQUIRED)
     private Integer price;
 
-    /** 所属景点ID */
+    @Schema(description = "所属景点ID", requiredMode = RequiredMode.REQUIRED)
     private Integer scenerySpotId;
 
-    /** 门票创建时间戳 */
+    @Schema(description = "门票创建时间戳")
     private long createTimestamp;
 
-    /** 门票更新时间戳 */
+    @Schema(description = "门票更新时间戳")
     private long updateTimestamp;
 
     private Ticket() {}

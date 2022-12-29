@@ -1,5 +1,8 @@
 package org.fly.sky.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -8,36 +11,37 @@ import java.io.Serializable;
  * @version 0.0
  * @since 0.0
  */
+@Schema(description = "订单")
 public class Order implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /** 订单ID */
+    @Schema(description = "订单ID")
     private Integer id;
 
-    /** 预定日期 | 格式YYYYMMSS */
+    @Schema(description = "预定日期YYYYMMSS", requiredMode = RequiredMode.REQUIRED)
     private Integer time;
 
-    /** 所属门票ID */
+    @Schema(description = "所属门票ID", requiredMode = RequiredMode.REQUIRED)
     private Integer ticketId;
 
-    /** 购买门票数量 */
+    @Schema(description = "购买门票数量", requiredMode = RequiredMode.REQUIRED)
     private Integer amount;
 
-    /** 所属客户ID */
+    @Schema(description = "所属客户ID", requiredMode = RequiredMode.REQUIRED)
     private Integer customerId;
 
-    /** 订单总金额 */
+    @Schema(description = "订单总金额", requiredMode = RequiredMode.REQUIRED)
     private Integer cost;
 
-    /** 订单备注 | 允许为空 */
+    @Schema(description = "订单备注")
     private String note;
 
-    /** 订单创建时间戳 */
+    @Schema(description = "订单创建时间戳")
     private long createTimestamp;
 
-    /** 订单更新时间戳 */
+    @Schema(description = "订单更新时间戳")
     private long updateTimestamp;
 
     private Order() {}

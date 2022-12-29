@@ -1,5 +1,8 @@
 package org.fly.sky.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -8,51 +11,52 @@ import java.io.Serializable;
  * @version 0.0
  * @since 0.0
  */
+@Schema(description = "用户")
 public class User implements Cloneable, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /** 用户ID */
+    @Schema(description = "用户ID")
     private Integer id;
 
-    /** 用户姓名 */
+    @Schema(description = "用户姓名", requiredMode = RequiredMode.REQUIRED)
     private String name;
 
-    /** 用户性别 | 0-男 1-女 | 允许为空 */
+    @Schema(description = "用户性别 | 0-男 1-女", requiredMode = RequiredMode.NOT_REQUIRED)
     private Integer sex;
 
-    /** 用户出生日期 | 允许为空 */
+    @Schema(description = "用户出生日期", requiredMode = RequiredMode.NOT_REQUIRED)
     private String birth;
 
-    /** 用户电话号码 */
+    @Schema(description = "用户电话号码", requiredMode = RequiredMode.REQUIRED)
     private String phone;
 
-    /** 用户个人简介 | 允许为空 */
+    @Schema(description = "用户个人简介", requiredMode = RequiredMode.NOT_REQUIRED)
     private String desc;
 
-    /** 用户邮箱 | 允许为空 */
+    @Schema(description = "用户邮箱", requiredMode = RequiredMode.NOT_REQUIRED)
     private String email;
 
-    /** 用户身份证号码 */
+    @Schema(description = "用户身份证号码", requiredMode = RequiredMode.REQUIRED)
     private String identity;
 
-    /** 用户居住地址 | 允许为空 */
+    @Schema(description = "用户居住地址", requiredMode = RequiredMode.NOT_REQUIRED)
     private String address;
 
-    /** 用户类型 0-普通用户 1-管理员 */
+    @Schema(description = "用户类型 0-普通用户 1-管理员", requiredMode = RequiredMode.REQUIRED)
     private Integer type;
 
-    /** 账号昵称 */
+    @Schema(description = "账号昵称", requiredMode = RequiredMode.REQUIRED)
     private String nickname;
 
-    /** 账号密码 */
+    @Schema(description = "账号密码", requiredMode = RequiredMode.REQUIRED)
     private String password;
 
-    /** 客户创建时间戳 */
+    @Schema(description = "客户创建时间戳")
     private long createTimestamp;
 
-    /** 客户更新时间戳 */
+    @Schema(description = "客户更新时间戳")
     private long updateTimestamp;
 
     private User() {}
@@ -328,4 +332,5 @@ public class User implements Cloneable, Serializable {
             throw new AssertionError();
         }
     }
+
 }
